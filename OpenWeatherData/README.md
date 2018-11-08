@@ -22,7 +22,7 @@ siehe [hier](../README.md#2-voraussetzungen)
 
 ## 3. Installation
 
-Allgemeine Einrichtung siehe [hier](../README.md#3-installationgen)
+Allgemeine Einrichtung siehe [hier](../README.md#3-installation)
 
 ### Einrichtung in IPS
 
@@ -48,13 +48,13 @@ liefert die Original-Ergebnisse der HTML-Aufrufe, z.B. zur Darstellung der HTML-
 
 `float OpenWeatherData_CalcAbsoluteHumidity(int $InstanzID, float $Temperatur, float $Humidity)`
 
-berechnet aus der Temperatur (in °C) und der relativen Luftfeuchtigkeit (in %) die absulte Feuchte (in g/m³)
+berechnet aus der Temperatur (in °C) und der relativen Luftfeuchtigkeit (in %) die absolute Feuchte (in g/m³)
 
 
 `float OpenWeatherData_CalcAbsolutePressure(int $InstanzID, float $Pressure, $Temperatur, int $Altitude)`
 
-berechnet aus dem relativen Luftdruck (in mbar) und der Temperatur (in °C) und Höhe (in m) der absoluten Luftdruck (in mbar)
-ist die Höhe nicht angegeben, wird die Höhe der Netatmo-Wettersttaion verwendet
+berechnet aus dem relativen Luftdruck (in mbar) und der Temperatur (in °C) und Höhe (in m) den absoluten Luftdruck (in mbar)
+ist die Höhe nicht angegeben, wird die Höhe der Netatmo-Wetterstation verwendet
 
 
 `float OpenWeatherData_CalcDewpoint(int $InstanzID, float $Temperatur, float $Humidity)`
@@ -74,7 +74,7 @@ berechnet aus der Temperatur (in °C) und der Windgeschwindigkeit (in km/h) den 
 
 `string OpenWeatherData_ConvertWindDirection2Text(int $InstanzID, int $WindDirection)`
 
-ermittelt aus der Windrichtung (in °) die korespondierende Bezeichnung auf der Windrose
+ermittelt aus der Windrichtung (in °) die korrespondierende Bezeichnung auf der Windrose
 
 
 `int OpenWeatherData_ConvertWindSpeed2Strength(int $InstanzID, float $WindSpeed)`
@@ -84,7 +84,7 @@ berechnet aus der Windgeschwindigkeit (in km/h) die Windstärke (in bft)
 
 `string OpenWeatherData_ConvertWindStrength2Text(int $InstanzID, int $WindStrength)`
 
-ermittelt aus der Windstärke (in bft) die korespondierende Bezeichnung gemäß Beaufortskala
+ermittelt aus der Windstärke (in bft) die korrespondierende Bezeichnung gemäß Beaufortskala
 
 
 ## 5. Konfiguration
@@ -123,7 +123,7 @@ ermittelt aus der Windstärke (in bft) die korespondierende Bezeichnung gemäß 
 
 Wenn _longitude_ und _latitude_ auf **0** stehen, werden die Daten aus dem Modul _Location_ verwendet. Die Angabe von _altitude_ ist nur erforderlich zur Berechnung des absoluten Luftdrucks.
 
-Die unterstützen Spracheinstellung finden sich in der API-Dokumentatin unter der Überschrift _Multilingual support_ und sind z.B. (_de_, _en_, _fr_ ...).
+Die unterstützen Spracheinstellungen finden sich in der API-Dokumentatin unter der Überschrift _Multilingual support_ und sind z.B. (_de_, _en_, _fr_ ...).
 
 Hinweis zu _with_icon_ und _with_condition_id_: diese Attribute können in der Nachricht mehrfach vorkommen. Damit man aber damit gut umgehen kann, wird immer nur der wichtigste Eintrag übernommen; laut _OpenWeatherMap_ ist das jeweils der erste Eintrag.
 
@@ -160,7 +160,7 @@ echo $html;
 
 ### Variablenprofile
 
-Es werden folgende Variableprofile angelegt:
+Es werden folgende Variablenprofile angelegt:
 * Integer<br>
 OpenWeatherMap.WindStrength, OpenWeatherMap.WindAngle
 

@@ -22,13 +22,13 @@ siehe [hier](../README.md#2-voraussetzungen)
 
 ## 3. Installation
 
-Allgemeine Einrichtung siehe [hier](../README.md#3-installationgen)
+Allgemeine Einrichtung siehe [hier](../README.md#3-installation)
 
 ### Einrichtung in IPS
 
 In IP-Symcon nun _Instanz hinzufügen_ (_CTRL+1_) auswählen unter der Kategorie, unter der man die Instanz hinzufügen will, und Hersteller _(sonstiges)_ und als Gerät _OpenWeatherStation_ auswählen.
 
-Da es bei _OpenWeather_ kein Web-Interface sonder nur eine API-Interface gibt, um eine Station zu registrieren, ist eine mehrere Schritte erforderlich.
+Da es bei _OpenWeather_ kein Web-Interface sondern nur ein API-Interface gibt, um eine Station zu registrieren, sind mehrere Schritte erforderlich.
 
 1. Ausfüllen der Daten der Station (externe ID, Name sowie geographische Position und Höhe) im Konfigurationsformular.
 2. Erstellen eines kleines PHP-Scripts (siehe _OpenWeatherStation_RegisterStation()_) und auѕführen
