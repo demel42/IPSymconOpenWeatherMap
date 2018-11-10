@@ -26,7 +26,7 @@ Allgemeine Einrichtung siehe [hier](../README.md#3-installation)
 
 ### Einrichtung in IPS
 
-In IP-Symcon nun _Instanz hinzufügen_ (_CTRL+1_) auswählen unter der Kategorie, unter der man die Instanz hinzufügen will, und Hersteller _(sonstiges)_ und als Gerät _OpenWeatherData_ auswählen.
+In IP-Symcon nun _Instanz hinzufügen_ (_CTRL+1_) auswählen unter der Kategorie, unter der man die Instanz hinzufügen will, und Hersteller _(sonstiges)_ und als Gerät _OpenWeatherMap-Datenabruf_ auswählen.
 
 ## 4. Funktionsreferenz
 
@@ -121,9 +121,9 @@ ermittelt aus der Windstärke (in bft) die korrespondierende Bezeichnung gemäß
 |                           |         |              |                                            |
 | update_interval           | integer | 60           | Aktualisierungsintervall in Minuten        |
 
-Wenn _longitude_ und _latitude_ auf **0** stehen, werden die Daten aus dem Modul _Location_ verwendet. Die Angabe von _altitude_ ist nur erforderlich zur Berechnung des absoluten Luftdrucks.
+Wenn _longitude_ und _latitude_ auf **0** stehen, werden die Daten aus der ersten gefundenen Instanz des Moduls _Location Control_ verwendet. Die Angabe von _altitude_ ist nur erforderlich zur Berechnung des absoluten Luftdrucks.
 
-Die unterstützen Spracheinstellungen finden sich in der API-Dokumentatin unter der Überschrift _Multilingual support_ und sind z.B. (_de_, _en_, _fr_ ...).
+Die unterstützten Spracheinstellungen finden sich in der API-Dokumentatin unter der Überschrift _Multilingual support_ und sind z.B. (_de_, _en_, _fr_ ...).
 
 Hinweis zu _with_icon_ und _with_condition_id_: diese Attribute können in der Nachricht mehrfach vorkommen. Damit man aber damit gut umgehen kann, wird immer nur der wichtigste Eintrag übernommen; laut _OpenWeatherMap_ ist das jeweils der erste Eintrag.
 

@@ -26,7 +26,7 @@ Allgemeine Einrichtung siehe [hier](../README.md#3-installation)
 
 ### Einrichtung in IPS
 
-In IP-Symcon nun _Instanz hinzufügen_ (_CTRL+1_) auswählen unter der Kategorie, unter der man die Instanz hinzufügen will, und Hersteller _(sonstiges)_ und als Gerät _OpenWeatherStation_ auswählen.
+In IP-Symcon nun _Instanz hinzufügen_ (_CTRL+1_) auswählen unter der Kategorie, unter der man die Instanz hinzufügen will, und Hersteller _(sonstiges)_ und als Gerät _OpenWeatherMap-Messwerte übertragen_ auswählen.
 
 Da es bei _OpenWeather_ kein Web-Interface sondern nur ein API-Interface gibt, um eine Station zu registrieren, sind mehrere Schritte erforderlich.
 
