@@ -84,6 +84,11 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.7 @ 04.07.2023 14:44
+  - Vorbereitung auf IPS 7 / PHP 8.2
+  - update submodule CommonStubs
+    - Absicherung bei Zugriff auf Objekte und Inhalte
+
 - 2.6 @ 03.01.2023 09:57
   - Neu: Führen einer Statistik der API-Calls, Anzeige als Popup im Experten-Bereich
   - Neu (OpenWeatherOneCall): Unterstürzung der API-Version 3.0
