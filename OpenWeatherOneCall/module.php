@@ -100,6 +100,52 @@ class OpenWeatherOneCall extends IPSModule
         return $r;
     }
 
+    private function CheckModuleUpdate(array $oldInfo, array $newInfo)
+    {
+        $r = [];
+
+        if ($this->version2num($oldInfo) < $this->version2num('2.8')) {
+            $old_minutely = false;
+            $minutely_forecast_count = $this->ReadPropertyInteger('minutely_forecast_count');
+            for ($i = 0; $i < $minutely_forecast_count; $i++) {
+                $pre = 'MinutelyForecast';
+                $post = '_' . sprintf('%02d', $i);
+                @$varID = $this->GetIDForIdent($pre . 'RainProbability' . $post);
+                if (@$varID != false) {
+                    $old_minutely = true;
+                    break;
+                }
+            }
+            if ($old_minutely) {
+                $r[] = $this->Translate('Rename variables beginning with \'MinutelyForecastRainProbability_\'');
+            }
+        }
+
+        return $r;
+    }
+
+    private function CompleteModuleUpdate(array $oldInfo, array $newInfo)
+    {
+        if ($this->version2num($oldInfo) < $this->version2num('2.8')) {
+            $minutely_forecast_count = $this->ReadPropertyInteger('minutely_forecast_count');
+            $with_rain_probability = $this->ReadPropertyBoolean('with_rain_probability');
+            for ($i = 0; $i < $minutely_forecast_count; $i++) {
+                $vpos = 1000 + (100 * $i);
+                $s = ' #M' . ($i + 1);
+                $pre = 'MinutelyForecast';
+                $post = '_' . sprintf('%02d', $i);
+                @$varID = $this->GetIDForIdent($pre . 'RainProbability' . $post);
+                if (@$varID != false) {
+                    IPS_SetIdent($varID, $pre . 'Precipitation' . $post);
+                    IPS_SetName($varID, $this->Translate('Precipitation') . $s);
+                    $this->MaintainVariable($pre . 'Precipitation' . $post, $this->Translate('Precipitation') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Rainfall', $vpos++, $with_rain_probability);
+                }
+            }
+        }
+
+        return '';
+    }
+
     public function ApplyChanges()
     {
         parent::ApplyChanges();
@@ -174,7 +220,7 @@ class OpenWeatherOneCall extends IPSModule
             $post = '_' . sprintf('%02d', $i);
 
             $this->MaintainVariable($pre . 'Begin' . $post, $this->Translate('Begin of minutely forecast-period') . $s, VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, $use);
-            $this->MaintainVariable($pre . 'RainProbability' . $post, $this->Translate('Rain propability') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.RainProbability', $vpos++, $use && $with_rain_probability);
+            $this->MaintainVariable($pre . 'Precipitation' . $post, $this->Translate('Precipitation') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Rainfall', $vpos++, $use && $with_rain_probability);
         }
 
         for ($i = 0; $i < self::$MAX_HOURLY_FORECAST; $i++) {
@@ -196,8 +242,8 @@ class OpenWeatherOneCall extends IPSModule
             $this->MaintainVariable($pre . 'WindAngle' . $post, $this->Translate('Winddirection') . $s, VARIABLETYPE_INTEGER, 'OpenWeatherMap.WindAngle', $vpos++, $use && $with_windangle);
             $this->MaintainVariable($pre . 'WindDirection' . $post, $this->Translate('Winddirection') . $s, VARIABLETYPE_STRING, 'OpenWeatherMap.WindDirection', $vpos++, $use && $with_winddirection);
             $this->MaintainVariable($pre . 'WindGust' . $post, $this->Translate('Windgust') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.WindSpeed', $vpos++, $use);
-            $this->MaintainVariable($pre . 'Rain_1h' . $post, $this->Translate('Rainfall of last hour') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Rainfall', $vpos++, $use);
-            $this->MaintainVariable($pre . 'Snow_1h' . $post, $this->Translate('Snowfall of last hour') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Snowfall', $vpos++, $use);
+            $this->MaintainVariable($pre . 'Rain_1h' . $post, $this->Translate('Rainfall per hour') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Rainfall', $vpos++, $use);
+            $this->MaintainVariable($pre . 'Snow_1h' . $post, $this->Translate('Snowfall per hour') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Snowfall', $vpos++, $use);
             $this->MaintainVariable($pre . 'RainProbability' . $post, $this->Translate('Rain propability') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.RainProbability', $vpos++, $use && $with_rain_probability);
             $this->MaintainVariable($pre . 'Cloudiness' . $post, $this->Translate('Cloudiness') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Cloudiness', $vpos++, $use && $with_cloudiness);
             $this->MaintainVariable($pre . 'Conditions' . $post, $this->Translate('Conditions') . $s, VARIABLETYPE_STRING, '', $vpos++, $use && $with_conditions);
@@ -756,7 +802,7 @@ class OpenWeatherOneCall extends IPSModule
             $precipitation = $this->GetArrayElem($ent, 'precipitation', 0);
 
             $this->SetValue($pre . 'Begin' . $post, $begin_ts);
-            $this->SetValue($pre . 'RainProbability' . $post, $precipitation);
+            $this->SetValue($pre . 'Precipitation' . $post, $precipitation);
         }
 
         $hourly_forecast_count = $this->ReadPropertyInteger('hourly_forecast_count');

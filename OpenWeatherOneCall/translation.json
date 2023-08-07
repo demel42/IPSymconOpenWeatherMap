@@ -3,6 +3,10 @@
 		"de": {
 			"OpenWeatherMap - fetch current observations and forecast": "OpenWeatherMap - Abruf aktueller Beobachtungen und Vorhersagen",
 
+			"__function__": "CheckModuleUpdate",
+			"Rename variables beginning with 'MinutelyForecastRainProbability_'":
+				"Umbenennen von Variablen, die mit 'MinutelyForecastRainProbability_' beginnen",
+
 			"__function__": "CheckConfiguration",
 			"API key must be specified": "API-Key muss angegeben werden",
 
@@ -15,7 +19,8 @@
 
 			"Basic settings": "Grundeinstellung",
 			"API key": "API-Key",
-			"station data - if position is not set, Modue 'Location' is used": "Angaben zur Station - falls die Position nicht angegeben ist, wird das Modul 'Location' verwendet",
+			"station data - if position is not set, Modue 'Location' is used":
+				"Angaben zur Station - falls die Position nicht angegeben ist, wird das Modul 'Location' verwendet",
 			"Longitude" : "Längengrad",
 			"Latitude" : "Breitengrad",
 			"Altitude" : "Höhe",
@@ -76,10 +81,13 @@
 			"minimum temperature": "minimale Temperatur",
 			"Morning temperature": "Morgentemperatur",
 			"Night temperature": "Nachtemperatur",
+			"Precipitation": "Niederschlag",
 			"Rainfall of last hour": "Regenmenge der letzten Stunde",
+			"Rainfall per hour": "Regenmenge pro Stunde",
 			"Rainfall": "Regenmenge",
 			"Rain propability": "Regenwahrscheinlichkeit",
 			"Snowfall of last hour": "Schneefall der letzten Stunde",
+			"Snowfall per hour": "Schneefall pro Stunde",
 			"Temperature": "Temperatur",
 			"UV-Index": "UV-Index",
 			"Windchill": "Windchill",

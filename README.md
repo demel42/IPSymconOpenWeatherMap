@@ -84,6 +84,10 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.8 @ 07.08.2023 08:46
+  - Fix: minütliche Niederschlagvorhersage wurde fälschlicherweise als Regenwahrscheinlichkeit interpretiert
+  - update submodule CommonStubs
+
 - 2.7 @ 04.07.2023 14:44
   - Vorbereitung auf IPS 7 / PHP 8.2
   - update submodule CommonStubs
