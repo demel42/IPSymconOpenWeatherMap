@@ -95,6 +95,40 @@ class OpenWeatherData extends IPSModule
         return $r;
     }
 
+    private function CheckModuleUpdate(array $oldInfo, array $newInfo)
+    {
+        $r = [];
+
+        if ($this->version2num($oldInfo) < $this->version2num('2.9')) {
+            $r[] = $this->Translate('Adjusting the value range of various variable profiles');
+        }
+
+        return $r;
+    }
+
+    private function CompleteModuleUpdate(array $oldInfo, array $newInfo)
+    {
+        if ($this->version2num($oldInfo) < $this->version2num('2.9')) {
+            $vps = [
+                'OpenWeatherMap.Temperatur',
+                'OpenWeatherMap.Humidity',
+                'OpenWeatherMap.absHumidity',
+                'OpenWeatherMap.Dewpoint',
+                'OpenWeatherMap.Heatindex',
+                'OpenWeatherMap.WindSpeed',
+                'OpenWeatherMap.RainProbability',
+            ];
+            foreach ($vps as $vp) {
+                if (IPS_VariableProfileExists($vp)) {
+                    IPS_DeleteVariableProfile($vp);
+                }
+            }
+            $this->InstallVarProfiles(false);
+        }
+
+        return '';
+    }
+
     public function ApplyChanges()
     {
         parent::ApplyChanges();

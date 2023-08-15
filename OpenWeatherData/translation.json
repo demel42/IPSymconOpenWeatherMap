@@ -3,6 +3,9 @@
 		"de": {
 			"OpenWeatherMap - fetch current observations and forecast": "OpenWeatherMap - Abruf aktueller Beobachtungen und Vorhersagen",
 
+			"__function__": "CheckModuleUpdate",
+			"Adjusting the value range of various variable profiles": "Wertebereich diverser Variablenprofile anpassen",
+
 			"__function__": "CheckConfiguration",
 			"API key must be specified": "API-Key muss angegeben werden",
 

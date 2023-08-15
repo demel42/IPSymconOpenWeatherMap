@@ -121,6 +121,10 @@ class OpenWeatherOneCall extends IPSModule
             }
         }
 
+        if ($this->version2num($oldInfo) < $this->version2num('2.9')) {
+            $r[] = $this->Translate('Adjusting the value range of various variable profiles');
+        }
+
         return $r;
     }
 
@@ -141,6 +145,24 @@ class OpenWeatherOneCall extends IPSModule
                     $this->MaintainVariable($pre . 'Precipitation' . $post, $this->Translate('Precipitation') . $s, VARIABLETYPE_FLOAT, 'OpenWeatherMap.Rainfall', $vpos++, $with_rain_probability);
                 }
             }
+        }
+
+        if ($this->version2num($oldInfo) < $this->version2num('2.9')) {
+            $vps = [
+                'OpenWeatherMap.Temperatur',
+                'OpenWeatherMap.Humidity',
+                'OpenWeatherMap.absHumidity',
+                'OpenWeatherMap.Dewpoint',
+                'OpenWeatherMap.Heatindex',
+                'OpenWeatherMap.WindSpeed',
+                'OpenWeatherMap.RainProbability',
+            ];
+            foreach ($vps as $vp) {
+                if (IPS_VariableProfileExists($vp)) {
+                    IPS_DeleteVariableProfile($vp);
+                }
+            }
+            $this->InstallVarProfiles(false);
         }
 
         return '';

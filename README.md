@@ -84,6 +84,16 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.9 @ 15.08.2023 09:31
+  - Fix: Wertebereich diverser Variablenprofile angepasst
+	- OpenWeatherMap.Temperatur: -10..30 -> -25..45 °C
+	- OpenWeatherMap.Humidity: n/a -> 0..100 %
+	- OpenWeatherMap.absHumidity: 10..100 -> 0..80 g/m³
+	- OpenWeatherMap.Dewpoint: 0..30 -> -10..40 °C
+	- OpenWeatherMap.Heatindex: 0..100 -> 0..60 °C
+	- OpenWeatherMap.WindSpeed: 0..100 -> 0..150 km/h
+	- OpenWeatherMap.RainProbability: n/a -> 0..100 %
+
 - 2.8 @ 07.08.2023 08:46
   - Fix: minütliche Niederschlagvorhersage wurde fälschlicherweise als Regenwahrscheinlichkeit interpretiert
   - update submodule CommonStubs
