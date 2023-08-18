@@ -84,6 +84,11 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.10 @ 18.08.2023 10:49
+  - Fix: Fehlermeldung bei Verwendung von "GetRawData()" vor ضem ersten Datenabruf
+  - update submodule CommonStubs
+    - die Daten für das Panel "Referenzen" werden erst geladen, wenn das Panel geöffnet wird. Auf langsameren Systemen erzeugte das ein unübersehbares Performanceproblem.
+
 - 2.9 @ 15.08.2023 09:31
   - Fix: Wertebereich diverser Variablenprofile angepasst
 	- OpenWeatherMap.Temperatur: -10..30 -> -25..45 °C

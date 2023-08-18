@@ -1240,7 +1240,7 @@ class OpenWeatherData extends IPSModule
     public function GetRawData(string $name)
     {
         $data = $this->GetMultiBuffer($name);
-        $this->SendDebug(__FUNCTION__, 'name=' . $name . ', size=' . strlen($data) . ', data=' . $data, 0);
+        $this->SendDebug(__FUNCTION__, 'name=' . $name . ', size=' . strlen((string) $data) . ', data=' . $data, 0);
         return $data;
     }
 }
