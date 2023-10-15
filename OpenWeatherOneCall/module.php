@@ -17,13 +17,16 @@ class OpenWeatherOneCall extends IPSModule
     public static $API_VERSION_2_5 = 0;
     public static $API_VERSION_3_0 = 1;
 
-    private $ModuleDir;
-
     public function __construct(string $InstanceID)
     {
         parent::__construct($InstanceID);
 
-        $this->ModuleDir = __DIR__;
+        $this->CommonContruct(__DIR__);
+    }
+
+    public function __destruct()
+    {
+        $this->CommonDestruct();
     }
 
     public function Create()
@@ -66,8 +69,9 @@ class OpenWeatherOneCall extends IPSModule
 
         $this->RegisterPropertyInteger('update_interval', 15);
 
-        $this->RegisterAttributeString('UpdateInfo', '');
+        $this->RegisterAttributeString('UpdateInfo', json_encode([]));
         $this->RegisterAttributeString('ApiCallStats', json_encode([]));
+        $this->RegisterAttributeString('ModuleStats', json_encode([]));
 
         $this->InstallVarProfiles(false);
 
