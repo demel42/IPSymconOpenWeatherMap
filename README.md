@@ -84,7 +84,7 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
-- 2.11 @ 15.10.2023 13:51
+- 2.11 @ 03.11.2023 11:06
   - Neu: Ermittlung von Speicherbedarf und Laufzeit (aktuell und für 31 Tage) und Anzeige im Panel "Information"
   - Fix: die Statistik der ApiCalls wird nicht mehr nach uri sondern nur noch host+cmd differenziert
   - update submodule CommonStubs
