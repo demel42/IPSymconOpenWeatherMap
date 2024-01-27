@@ -84,6 +84,11 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.12 @ 27.01.2024 11:35
+  - Neu: Schalter, um Daten zu API-Aufrufen zu sammeln
+    Die API-Aufruf-Daten stehen nun in einem Medienobjekt zur Verfügung
+  - update submodule CommonStubs
+
 - 2.11 @ 03.11.2023 11:06
   - Neu: Ermittlung von Speicherbedarf und Laufzeit (aktuell und für 31 Tage) und Anzeige im Panel "Information"
   - Fix: die Statistik der ApiCalls wird nicht mehr nach uri sondern nur noch host+cmd differenziert

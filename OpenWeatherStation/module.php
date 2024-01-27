@@ -55,8 +55,9 @@ class OpenWeatherStation extends IPSModule
 
         $this->RegisterPropertyInteger('transmit_interval', 5);
 
+        $this->RegisterPropertyBoolean('collectApiCallStats', true);
+
         $this->RegisterAttributeString('UpdateInfo', json_encode([]));
-        $this->RegisterAttributeString('ApiCallStats', json_encode([]));
         $this->RegisterAttributeString('ModuleStats', json_encode([]));
 
         $this->InstallVarProfiles(false);
@@ -128,7 +129,7 @@ class OpenWeatherStation extends IPSModule
             return;
         }
 
-        $vpos = 0;
+        $vpos = 1;
 
         $this->MaintainVariable('LastTransmission', $this->Translate('last transmission'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
 
@@ -302,6 +303,12 @@ class OpenWeatherStation extends IPSModule
             'caption' => 'Transmission interval'
         ];
 
+        $formElements[] = [
+            'type'    => 'CheckBox',
+            'name'    => 'collectApiCallStats',
+            'caption' => 'Collect data of API calls'
+        ];
+
         return $formElements;
     }
 
@@ -324,14 +331,17 @@ class OpenWeatherStation extends IPSModule
             'onClick' => $this->GetModulePrefix() . '_TransmitMeasurements($id);'
         ];
 
-        $formActions[] = [
-            'type'      => 'ExpansionPanel',
-            'caption'   => 'Expert area',
-            'expanded'  => false,
-            'items'     => [
-                $this->GetApiCallStatsFormItem(),
-            ],
-        ];
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $formActions[] = [
+                'type'      => 'ExpansionPanel',
+                'caption'   => 'Expert area',
+                'expanded'  => false,
+                'items'     => [
+                    $this->GetApiCallStatsFormItem(),
+                ],
+            ];
+        }
 
         $formActions[] = $this->GetInformationFormAction();
         $formActions[] = $this->GetReferencesFormAction();
@@ -680,7 +690,10 @@ class OpenWeatherStation extends IPSModule
             $this->SendDebug(__FUNCTION__, ' => statuscode=' . $statuscode . ', err=' . $err, 0);
         }
 
-        $this->ApiCallsCollect($url, $err, $statuscode);
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $this->ApiCallCollect($url, $err, $statuscode);
+        }
 
         return $statuscode;
     }

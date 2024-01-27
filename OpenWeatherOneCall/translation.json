@@ -63,6 +63,8 @@
 			"Begin of hourly forecast-period": "Beginn des stündlichen Vorhersage-Zeitraumes",
 			"Begin of daily forecast-period": "Beginn des täglichen Vorhersage-Zeitraumes",
 
+			"Collect data of API calls": "Daten von API-Aufrufen sammeln",
+
 			"__variables__": "",
 			"absolute humidity": "absolute Luftfeuchtigkeit",
 			"absolute pressure": "absoluter Luftdruck",

@@ -69,8 +69,9 @@ class OpenWeatherOneCall extends IPSModule
 
         $this->RegisterPropertyInteger('update_interval', 15);
 
+        $this->RegisterPropertyBoolean('collectApiCallStats', true);
+
         $this->RegisterAttributeString('UpdateInfo', json_encode([]));
-        $this->RegisterAttributeString('ApiCallStats', json_encode([]));
         $this->RegisterAttributeString('ModuleStats', json_encode([]));
 
         $this->InstallVarProfiles(false);
@@ -215,7 +216,7 @@ class OpenWeatherOneCall extends IPSModule
         $hourly_forecast_count = $this->ReadPropertyInteger('hourly_forecast_count');
         $daily_forecast_count = $this->ReadPropertyInteger('daily_forecast_count');
 
-        $vpos = 0;
+        $vpos = 1;
         $this->MaintainVariable('Temperature', $this->Translate('Temperature'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.Temperatur', $vpos++, true);
         $this->MaintainVariable('Humidity', $this->Translate('Humidity'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.Humidity', $vpos++, true);
         $this->MaintainVariable('AbsoluteHumidity', $this->Translate('absolute humidity'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.absHumidity', $vpos++, $with_absolute_humidity);
@@ -332,7 +333,7 @@ class OpenWeatherOneCall extends IPSModule
         $s = $this->Translate('After the free number has been used, there will be a cost, see here for details');
         $apiNotes .= $s . ': ' . 'https://home.openweathermap.org/subscriptions' . PHP_EOL;
 
-        $this->ApiCallsSetInfo($apiLimits, $apiNotes);
+        $this->ApiCallSetInfo($apiLimits, $apiNotes);
 
         if (IPS_GetKernelRunlevel() == KR_READY) {
             $this->SetUpdateInterval();
@@ -565,6 +566,12 @@ class OpenWeatherOneCall extends IPSModule
             ],
         ];
 
+        $formElements[] = [
+            'type'    => 'CheckBox',
+            'name'    => 'collectApiCallStats',
+            'caption' => 'Collect data of API calls'
+        ];
+
         return $formElements;
     }
 
@@ -587,14 +594,20 @@ class OpenWeatherOneCall extends IPSModule
             'onClick' => $this->GetModulePrefix() . '_UpdateData($id);'
         ];
 
+        $items = [
+            $this->GetInstallVarProfilesFormItem(),
+        ];
+
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $items[] = $this->GetApiCallStatsFormItem();
+        }
+
         $formActions[] = [
             'type'      => 'ExpansionPanel',
             'caption'   => 'Expert area',
             'expanded'  => false,
-            'items'     => [
-                $this->GetInstallVarProfilesFormItem(),
-                $this->GetApiCallStatsFormItem(),
-            ],
+            'items'     => $items,
         ];
 
         $formActions[] = $this->GetInformationFormAction();
@@ -1117,7 +1130,10 @@ class OpenWeatherOneCall extends IPSModule
             $this->MaintainStatus($statuscode);
         }
 
-        $this->ApiCallsCollect($url, $err, $statuscode);
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $this->ApiCallCollect($url, $err, $statuscode);
+        }
 
         return $jdata;
     }

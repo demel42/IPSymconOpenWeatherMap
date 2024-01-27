@@ -51,6 +51,8 @@
 			"Hint: the update frequency of the OpenWeather model is not higher than once in 10 minutes (https://openweathermap.org/appid)":
 				"Hinweis: Die Aktualisierungsfrequenz des OpenWeather-Modells ist nicht höher als einmal in 10 Minuten (https://openweathermap.org/appid)",
 
+			"Collect data of API calls": "Daten von API-Aufrufen sammeln",
+
 			"__variables__": "",
 			"absolute humidity": "absolute Luftfeuchtigkeit",
 			"absolute pressure": "absoluter Luftdruck",

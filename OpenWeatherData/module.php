@@ -63,8 +63,9 @@ class OpenWeatherData extends IPSModule
         $this->RegisterPropertyBoolean('with_summary', false);
         $this->RegisterPropertyInteger('summary_script', 0);
 
+        $this->RegisterPropertyBoolean('collectApiCallStats', true);
+
         $this->RegisterAttributeString('UpdateInfo', json_encode([]));
-        $this->RegisterAttributeString('ApiCallStats', json_encode([]));
         $this->RegisterAttributeString('ModuleStats', json_encode([]));
 
         $this->InstallVarProfiles(false);
@@ -176,7 +177,7 @@ class OpenWeatherData extends IPSModule
         $with_summary = $this->ReadPropertyBoolean('with_summary');
         $with_current_condition = $this->ReadPropertyBoolean('with_current_condition');
 
-        $vpos = 0;
+        $vpos = 1;
         $this->MaintainVariable('Temperature', $this->Translate('Temperature'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.Temperatur', $vpos++, true);
         $this->MaintainVariable('Humidity', $this->Translate('Humidity'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.Humidity', $vpos++, true);
         $this->MaintainVariable('AbsoluteHumidity', $this->Translate('absolute humidity'), VARIABLETYPE_FLOAT, 'OpenWeatherMap.absHumidity', $vpos++, $with_absolute_humidity);
@@ -247,7 +248,7 @@ class OpenWeatherData extends IPSModule
 
         $apiNotes = '';
 
-        $this->ApiCallsSetInfo($apiLimits, $apiNotes);
+        $this->ApiCallSetInfo($apiLimits, $apiNotes);
 
         $this->MaintainStatus(IS_ACTIVE);
 
@@ -446,6 +447,12 @@ class OpenWeatherData extends IPSModule
             ],
         ];
 
+        $formElements[] = [
+            'type'    => 'CheckBox',
+            'name'    => 'collectApiCallStats',
+            'caption' => 'Collect data of API calls'
+        ];
+
         return $formElements;
     }
 
@@ -468,14 +475,20 @@ class OpenWeatherData extends IPSModule
             'onClick' => $this->GetModulePrefix() . '_UpdateData($id);'
         ];
 
+        $items = [
+            $this->GetInstallVarProfilesFormItem(),
+        ];
+
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $items[] = $this->GetApiCallStatsFormItem();
+        }
+
         $formActions[] = [
             'type'      => 'ExpansionPanel',
             'caption'   => 'Expert area',
             'expanded'  => false,
-            'items'     => [
-                $this->GetInstallVarProfilesFormItem(),
-                $this->GetApiCallStatsFormItem(),
-            ],
+            'items'     => $items,
         ];
 
         $formActions[] = $this->GetInformationFormAction();
@@ -1038,7 +1051,10 @@ class OpenWeatherData extends IPSModule
             $this->MaintainStatus($statuscode);
         }
 
-        $this->ApiCallsCollect($url, $err, $statuscode);
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        if ($collectApiCallStats) {
+            $this->ApiCallCollect($url, $err, $statuscode);
+        }
 
         return $jdata;
     }

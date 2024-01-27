@@ -39,6 +39,8 @@
 			"Transmission interval": "Übertragungsintervall",
 			"Minutes": "Minuten",
 
+			"Collect data of API calls": "Daten von API-Aufrufen sammeln",
+
 			"__variables__": "",
 			"last transmission": "letzte Übertragung",
 
