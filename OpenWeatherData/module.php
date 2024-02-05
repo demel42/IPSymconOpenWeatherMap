@@ -228,27 +228,31 @@ class OpenWeatherData extends IPSModule
             $this->MaintainVariable($pre . 'ConditionId' . $post, $this->Translate('Condition-id') . $s, VARIABLETYPE_STRING, '', $vpos++, $use && $with_condition_id);
         }
 
+        $vpos = 9000;
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        $this->MaintainMedia('ApiCallStats', $this->Translate('API call statistics'), MEDIATYPE_DOCUMENT, '.txt', false, $vpos++, $collectApiCallStats);
+
+        if ($collectApiCallStats) {
+            $apiLimits = [
+                [
+                    'value' => 60,
+                    'unit'  => 'minute',
+                ],
+                [
+                    'value' => 1000000,
+                    'unit'  => 'month',
+                ],
+            ];
+            $apiNotes = '';
+            $this->ApiCallSetInfo($apiLimits, $apiNotes);
+        }
+
         $module_disable = $this->ReadPropertyBoolean('module_disable');
         if ($module_disable) {
             $this->MaintainTimer('UpdateData', 0);
             $this->MaintainStatus(IS_INACTIVE);
             return;
         }
-
-        $apiLimits = [
-            [
-                'value' => 60,
-                'unit'  => 'minute',
-            ],
-            [
-                'value' => 1000000,
-                'unit'  => 'month',
-            ],
-        ];
-
-        $apiNotes = '';
-
-        $this->ApiCallSetInfo($apiLimits, $apiNotes);
 
         $this->MaintainStatus(IS_ACTIVE);
 

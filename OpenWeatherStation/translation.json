@@ -44,6 +44,9 @@
 			"__variables__": "",
 			"last transmission": "letzte Übertragung",
 
+			"__media__": "",
+			"API call statistics": "API-Aufruf-Statistkdaten",
+
 			"__actions__": "",
 			"Transmit weatherdata": "Wetterdaten übertragen",
 

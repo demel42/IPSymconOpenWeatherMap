@@ -313,6 +313,23 @@ class OpenWeatherOneCall extends IPSModule
         $vpos = 9000;
         $this->MaintainVariable('LastMeasurement', $this->Translate('last measurement'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
 
+        $vpos = 10000;
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        $this->MaintainMedia('ApiCallStats', $this->Translate('API call statistics'), MEDIATYPE_DOCUMENT, '.txt', false, $vpos++, $collectApiCallStats);
+
+        if ($collectApiCallStats) {
+            $apiLimits = [
+                [
+                    'value' => 1000,
+                    'unit'  => 'day',
+                ],
+            ];
+            $apiNotes = '';
+            $s = $this->Translate('After the free number has been used, there will be a cost, see here for details');
+            $apiNotes .= $s . ': ' . 'https://home.openweathermap.org/subscriptions' . PHP_EOL;
+            $this->ApiCallSetInfo($apiLimits, $apiNotes);
+        }
+
         $module_disable = $this->ReadPropertyBoolean('module_disable');
         if ($module_disable) {
             $this->MaintainTimer('UpdateData', 0);
@@ -321,19 +338,6 @@ class OpenWeatherOneCall extends IPSModule
         }
 
         $this->MaintainStatus(IS_ACTIVE);
-
-        $apiLimits = [
-            [
-                'value' => 1000,
-                'unit'  => 'day',
-            ],
-        ];
-
-        $apiNotes = '';
-        $s = $this->Translate('After the free number has been used, there will be a cost, see here for details');
-        $apiNotes .= $s . ': ' . 'https://home.openweathermap.org/subscriptions' . PHP_EOL;
-
-        $this->ApiCallSetInfo($apiLimits, $apiNotes);
 
         if (IPS_GetKernelRunlevel() == KR_READY) {
             $this->SetUpdateInterval();

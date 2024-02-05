@@ -129,6 +129,9 @@
 			"Hurricane force": "orkanartiger Sturm",
 			"Violent storm": "Orkan",
 
+			"__media__": "",
+			"API call statistics": "API-Aufruf-Statistkdaten",
+
 			"__actions__": "",
 			"Update weatherdata": "Aktualisiere Wetterdaten",
 

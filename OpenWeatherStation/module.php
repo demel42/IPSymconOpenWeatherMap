@@ -130,8 +130,11 @@ class OpenWeatherStation extends IPSModule
         }
 
         $vpos = 1;
-
         $this->MaintainVariable('LastTransmission', $this->Translate('last transmission'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
+
+        $vpos = 1000;
+        $collectApiCallStats = $this->ReadPropertyBoolean('collectApiCallStats');
+        $this->MaintainMedia('ApiCallStats', $this->Translate('API call statistics'), MEDIATYPE_DOCUMENT, '.txt', false, $vpos++, $collectApiCallStats);
 
         $module_disable = $this->ReadPropertyBoolean('module_disable');
         if ($module_disable) {
