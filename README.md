@@ -84,6 +84,10 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.13 @ 11.04.2024 09:52
+  - Änderung: in OpenWeatherStation wird nun ein passenderer Status bei Nicht-Erreichbarkeit des Servers genutzt
+  - update submodule CommonStubs
+
 - 2.12 @ 29.01.2024 10:57
   - Änderung: Medien-Objekte haben zur eindeutigen Identifizierung jetzt ebenfalls ein Ident
   - Neu: Schalter, um Daten zu API-Aufrufen zu sammeln

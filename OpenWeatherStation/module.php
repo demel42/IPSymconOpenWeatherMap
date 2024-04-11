@@ -665,7 +665,7 @@ class OpenWeatherStation extends IPSModule
         $err = '';
         $result = '';
         if ($cerrno) {
-            $statuscode = self::$IS_INVALIDDATA;
+            $statuscode = self::$IS_SERVERERROR;
             $err = 'got curl-errno ' . $cerrno . ' (' . $cerror . ')';
         } elseif ($httpcode < 200 || $httpcode > 299) {
             if ($httpcode >= 500 && $httpcode <= 599) {
