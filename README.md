@@ -84,7 +84,7 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
-- 2.13 @ 11.04.2024 09:52
+- 2.13 @ 15.04.2024 11:47
   - Änderung: in OpenWeatherStation wird nun ein passenderer Status bei Nicht-Erreichbarkeit des Servers genutzt
   - update submodule CommonStubs
 
