@@ -84,6 +84,10 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.14 @ 26.09.2024 18:13
+  - Fix: Position der Vorhersage-Variablen von OpenWeatherOneCall justiert
+  - update submodule CommonStubs
+
 - 2.13 @ 15.04.2024 11:47
   - Änderung: in OpenWeatherStation wird nun ein passenderer Status bei Nicht-Erreichbarkeit des Servers genutzt
   - update submodule CommonStubs

@@ -7,6 +7,7 @@
 			"Rename variables beginning with 'MinutelyForecastRainProbability_'":
 				"Umbenennen von Variablen, die mit 'MinutelyForecastRainProbability_' beginnen",
 			"Adjusting the value range of various variable profiles": "Wertebereich diverser Variablenprofile anpassen",
+			"Adjusting position of forecast variables": "Anpassung der Position der Vorhersage-Variablen",
 
 			"__function__": "CheckConfiguration",
 			"API key must be specified": "API-Key muss angegeben werden",

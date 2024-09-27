@@ -21,7 +21,7 @@ class OpenWeatherOneCall extends IPSModule
     {
         parent::__construct($InstanceID);
 
-        $this->CommonContruct(__DIR__);
+        $this->CommonConstruct(__DIR__);
     }
 
     public function __destruct()
@@ -130,6 +130,10 @@ class OpenWeatherOneCall extends IPSModule
             $r[] = $this->Translate('Adjusting the value range of various variable profiles');
         }
 
+        if ($this->version2num($oldInfo) < $this->version2num('2.14')) {
+            $r[] = $this->Translate('Adjusting position of forecast variables');
+        }
+
         return $r;
     }
 
@@ -168,6 +172,102 @@ class OpenWeatherOneCall extends IPSModule
                 }
             }
             $this->InstallVarProfiles(false);
+        }
+
+        if ($this->version2num($oldInfo) < $this->version2num('2.14')) {
+            for ($i = 0; $i < self::$MAX_MINUTELY_FORECAST; $i++) {
+                $vpos = 1000 + (10 * $i);
+                $pre = 'MinutelyForecast';
+                $post = '_' . sprintf('%02d', $i);
+
+                $idents = [
+                    'Begin',
+                    'Precipitation',
+                ];
+                foreach ($idents as $ident) {
+                    @$varID = $this->GetIDForIdent($pre . $ident . $post);
+                    if ($varID != false) {
+                        IPS_SetPosition($varID, $vpos);
+                    }
+                    $vpos++;
+                }
+            }
+
+            for ($i = 0; $i < self::$MAX_HOURLY_FORECAST; $i++) {
+                $vpos = 2000 + (25 * $i);
+                $pre = 'HourlyForecast';
+                $post = '_' . sprintf('%02d', $i);
+
+                $idents = [
+                    'Begin',
+                    'Temperature',
+                    'UVIndex',
+                    'Humidity',
+                    'Pressure',
+                    'AbsolutePressure',
+                    'WindSpeed',
+                    'WindStrength',
+                    'WindStrengthText',
+                    'WindAngle',
+                    'WindDirection',
+                    'WindGust',
+                    'Rain_1h',
+                    'Snow_1h',
+                    'RainProbability',
+                    'Cloudiness',
+                    'Conditions',
+                    'ConditionIcon',
+                    'ConditionId',
+                ];
+                foreach ($idents as $ident) {
+                    @$varID = $this->GetIDForIdent($pre . $ident . $post);
+                    if ($varID != false) {
+                        IPS_SetPosition($varID, $vpos);
+                    }
+                    $vpos++;
+                }
+            }
+
+            for ($i = 0; $i < self::$MAX_DAILY_FORECAST; $i++) {
+                $vpos = 4000 + (30 * $i);
+                $pre = 'DailyForecast';
+                $post = '_' . sprintf('%02d', $i);
+
+                $idents = [
+                    'Begin',
+                    'TemperatureMorning',
+                    'TemperatureDay',
+                    'TemperatureEvening',
+                    'TemperatureNight',
+                    'TemperatureMin',
+                    'TemperatureMax',
+                    'UVIndex',
+                    'Humidity',
+                    'Pressure',
+                    'AbsolutePressure',
+                    'WindSpeed',
+                    'WindStrength',
+                    'WindStrengthText',
+                    'WindAngle',
+                    'WindDirection',
+                    'WindGust',
+                    'RainProbability',
+                    'Rain',
+                    'Cloudiness',
+                    'Conditions',
+                    'ConditionIcon',
+                    'ConditionId',
+                ];
+                foreach ($idents as $ident) {
+                    @$varID = $this->GetIDForIdent($pre . $ident . $post);
+                    if ($varID != false) {
+                        IPS_SetPosition($varID, $vpos);
+                    }
+                    $vpos++;
+                }
+            }
+
+            return '';
         }
 
         return '';
@@ -240,7 +340,7 @@ class OpenWeatherOneCall extends IPSModule
         $this->MaintainVariable('ConditionId', $this->Translate('Condition-id'), VARIABLETYPE_STRING, '', $vpos++, $with_condition_id);
 
         for ($i = 0; $i < self::$MAX_MINUTELY_FORECAST; $i++) {
-            $vpos = 1000 + (100 * $i);
+            $vpos = 1000 + (10 * $i);
             $use = $i < $minutely_forecast_count;
             $s = ' #M' . ($i + 1);
             $pre = 'MinutelyForecast';
@@ -251,7 +351,7 @@ class OpenWeatherOneCall extends IPSModule
         }
 
         for ($i = 0; $i < self::$MAX_HOURLY_FORECAST; $i++) {
-            $vpos = 2000 + (100 * $i);
+            $vpos = 2000 + (25 * $i);
             $use = $i < $hourly_forecast_count;
             $s = ' #H' . ($i + 1);
             $pre = 'HourlyForecast';
@@ -279,7 +379,7 @@ class OpenWeatherOneCall extends IPSModule
         }
 
         for ($i = 0; $i < self::$MAX_DAILY_FORECAST; $i++) {
-            $vpos = 3000 + (100 * $i);
+            $vpos = 4000 + (30 * $i);
             $use = $i < $daily_forecast_count;
             $s = ' #D' . ($i + 1);
             $pre = 'DailyForecast';
