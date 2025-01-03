@@ -84,7 +84,8 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
-- 2.15 @ 03.01.2025 14:17
+- 2.15 @ 03.01.2025 17:47
+ - Fix: Tägliche Vorhersage des Schneefalls nachgeführt
  - update submodule CommonStubs
 
 - 2.14 @ 30.09.2024 18:52
