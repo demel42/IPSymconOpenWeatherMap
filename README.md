@@ -84,6 +84,9 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.15 @ 03.01.2025 14:17
+ - update submodule CommonStubs
+
 - 2.14 @ 30.09.2024 18:52
   - Fix: Position der Vorhersage-Variablen von OpenWeatherOneCall justiert
   - update submodule CommonStubs
