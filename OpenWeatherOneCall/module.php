@@ -908,10 +908,10 @@ class OpenWeatherOneCall extends IPSModule
         }
         $this->SetValue('WindGust', $wind_gust);
 
-        $rain_1h = $this->GetArrayElem($jdata, 'rain.1h', 0);
+        $rain_1h = $this->GetArrayElem($jdata, 'current.rain.1h', 0);
         $this->SetValue('Rain_1h', $rain_1h);
 
-        $snow_1h = $this->GetArrayElem($jdata, 'snow.1h', 0);
+        $snow_1h = $this->GetArrayElem($jdata, 'current.snow.1h', 0);
         $this->SetValue('Snow_1h', $snow_1h);
 
         if ($with_cloudiness) {
