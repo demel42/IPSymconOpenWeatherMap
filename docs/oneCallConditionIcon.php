@@ -18,10 +18,8 @@ $instID = yyyyy;
 
 $scriptName = IPS_GetName($_IPS['SELF']) . '(' . $_IPS['SELF'] . ')';
 
-$img_url = 'http://openweathermap.org/img/w/';
-
 $icon = GetValueString(IPS_GetObjectIDByIdent('ConditionIcon', $instID));
 
-$html = '<img src="' . $img_url . $icon . '.png">';
+$html = '<img src="https://openweathermap.org/img/wn/' . $icon . '@2x.png">';
 
 SetValueString($varID, $html);

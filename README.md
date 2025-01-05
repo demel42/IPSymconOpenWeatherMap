@@ -84,6 +84,9 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.15.2 @ 05.01.2025 17:16
+  - Verbesserung: Beispiel-Scripte (im Verzeichnis *docs*) überarbeitet
+
 - 2.15.1 @ 04.01.2025 15:28
   - Fix: Übernahme der atuellen Werte von Regen und Schneefall korrigiert
 
