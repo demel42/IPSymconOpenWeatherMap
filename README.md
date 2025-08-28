@@ -84,6 +84,10 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.16 @ 28.08.2025 18:57
+  - Fix: in OpenWeatherOneCall wurden Windböen nicht vom m/s in km/h umgerechnet
+  - Fix: "vendor" des Moduls nun auf "Openweather" gesetzt
+
 - 2.15.2 @ 05.01.2025 17:16
   - Verbesserung: Beispiel-Scripte (im Verzeichnis *docs*) überarbeitet
 

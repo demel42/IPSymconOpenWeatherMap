@@ -832,10 +832,11 @@ class OpenWeatherOneCall extends IPSModule
 
         $visibility = $this->GetArrayElem($jdata, 'current.visibility', 0);
 
-        $wind_speed = $this->GetArrayElem($jdata, 'current.wind_speed', 0);
-        $wind_speed = (int) $this->ms2kmh($wind_speed);
+        $wind_speed = (float) $this->GetArrayElem($jdata, 'current.wind_speed', 0);
+        $wind_speed = (float) $this->ms2kmh($wind_speed);
         $wind_deg = $this->GetArrayElem($jdata, 'current.wind_deg', 0);
-        $wind_gust = $this->GetArrayElem($jdata, 'current.wind_gust', 0);
+        $wind_gust = (float) $this->GetArrayElem($jdata, 'current.wind_gust', 0);
+        $wind_gust = (float) $this->ms2kmh($wind_gust);
 
         $clouds = $this->GetArrayElem($jdata, 'current.clouds', 0);
 
@@ -969,10 +970,11 @@ class OpenWeatherOneCall extends IPSModule
 
             $visibility = $this->GetArrayElem($ent, 'visibility', 0);
 
-            $wind_speed = $this->GetArrayElem($ent, 'wind_speed', 0);
-            $wind_speed = (int) $this->ms2kmh($wind_speed);
+            $wind_speed = (float) $this->GetArrayElem($ent, 'wind_speed', 0);
+            $wind_speed = (float) $this->ms2kmh($wind_speed);
             $wind_deg = $this->GetArrayElem($ent, 'wind_deg', 0);
-            $wind_gust = $this->GetArrayElem($ent, 'wind_gust', 0);
+            $wind_gust = (float) $this->GetArrayElem($ent, 'wind_gust', 0);
+            $wind_gust = (float) $this->ms2kmh($wind_gust);
 
             $rain_1h = $this->GetArrayElem($ent, 'rain.1h', 0);
             $snow_1h = $this->GetArrayElem($ent, 'snow.1h', 0);

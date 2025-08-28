@@ -2,7 +2,7 @@
 	"id": "{8072158E-53BF-482A-B925-F4FBE522CEF2}",
 	"name": "OpenWeatherData",
 	"type": 3,
-	"vendor": "",
+	"vendor": "Openweather",
 	"aliases": [
 		"OpenWeatherMap - Datenabruf"
 	],

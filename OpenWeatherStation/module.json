@@ -2,7 +2,7 @@
 	"id": "{604AD7FF-7883-47E7-A2A8-0C6D3C343BE9}",
 	"name": "OpenWeatherStation",
 	"type": 3,
-	"vendor": "",
+	"vendor": "Openweather",
 	"aliases": [
 		"OpenWeatherMap - Messwerte übertragen"
 	],

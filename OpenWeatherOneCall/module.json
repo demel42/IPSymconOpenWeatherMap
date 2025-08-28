@@ -2,7 +2,7 @@
 	"id": "{99C682F3-C735-9EBD-5F74-B1F19518228B}",
 	"name": "OpenWeatherOneCall",
 	"type": 3,
-	"vendor": "",
+	"vendor": "Openweather",
 	"aliases": [
 		"OpenWeatherMap - OneCall-Datenabruf"
 	],
