@@ -1217,9 +1217,9 @@ class OpenWeatherOneCall extends IPSModule
         } elseif ($httpcode != 200) {
             if ($httpcode >= 500 && $httpcode <= 599) {
                 $statuscode = self::$IS_SERVERERROR;
-                $err = "got http-code $httpcode (server error)";
+                $err = 'got http-code ' . $httpcode . ' (server error)';
             } else {
-                $err = "got http-code $httpcode";
+                $err = 'got http-code ' . $httpcode . ' (' . $this->HttpCode2Text($httpcode) . ')';
                 $statuscode = self::$IS_HTTPERROR;
             }
         } elseif ($cdata == '') {

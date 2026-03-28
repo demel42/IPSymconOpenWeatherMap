@@ -84,6 +84,11 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.17 @ 28.03.2026 10:09
+  - Fix: Anpassung für IPS 9
+  - Fix: interne Änderung
+  - update submodule CommonStubs
+
 - 2.16 @ 28.08.2025 18:57
   - Fix: in OpenWeatherOneCall wurden Windböen nicht vom m/s in km/h umgerechnet
   - Fix: "vendor" des Moduls nun auf "Openweather" gesetzt
