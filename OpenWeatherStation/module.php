@@ -507,7 +507,7 @@ class OpenWeatherStation extends IPSModule
         $altitude = $this->ReadPropertyFloat('altitude');
 
         if ($latitude == 0 || $longitude == 0) {
-            $id = IPS_GetInstanceListByModuleID('{45E97A63-F870-408A-B259-2933F7EABF74}')[0];
+            $id = (array) IPS_GetInstanceListByModuleID('{45E97A63-F870-408A-B259-2933F7EABF74}')[0];
             $loc = json_decode(IPS_GetProperty($id, 'Location'), true);
             $latitude = $loc['latitude'];
             $longitude = $loc['longitude'];
@@ -548,7 +548,7 @@ class OpenWeatherStation extends IPSModule
         $altitude = $this->ReadPropertyFloat('altitude');
 
         if ($latitude == 0 || $longitude == 0) {
-            $id = IPS_GetInstanceListByModuleID('{45E97A63-F870-408A-B259-2933F7EABF74}')[0];
+            $id = (array) IPS_GetInstanceListByModuleID('{45E97A63-F870-408A-B259-2933F7EABF74}')[0];
             $loc = json_decode(IPS_GetProperty($id, 'Location'), true);
             $latitude = $loc['latitude'];
             $longitude = $loc['longitude'];
@@ -655,7 +655,9 @@ class OpenWeatherStation extends IPSModule
         $cerrno = curl_errno($ch);
         $cerror = $cerrno ? curl_error($ch) : '';
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        if (IPS_GetKernelVersion() < 8.5) {
+            curl_close($ch);
+        }
 
         $duration = round(microtime(true) - $time_start, 2);
         $this->SendDebug(__FUNCTION__, ' => errno=' . $cerrno . ', httpcode=' . $httpcode . ', duration=' . $duration . 's', 0);

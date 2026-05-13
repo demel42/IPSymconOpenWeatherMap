@@ -84,6 +84,10 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.18 @ 11.05.2026 15:02
+  - Fix: Änderung von deprecated php code
+  - update submodule CommonStubs
+
 - 2.17 @ 28.03.2026 10:09
   - Fix: Anpassung für IPS 9
   - Fix: interne Änderung
