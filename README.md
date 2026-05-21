@@ -84,6 +84,9 @@ Beispielscripte:
 
 ## 7. Versions-Historie
 
+- 2.18.1 @ 21.05.2026 17:14
+  - Fix: Korrektur zu 2.18 (fehlerhafter Type-Cast)
+
 - 2.18 @ 11.05.2026 15:02
   - Fix: Änderung von deprecated php code
   - update submodule CommonStubs
